@@ -2,13 +2,14 @@ package Interfaces;
 
 import Classes.CFolder;
 
+import java.nio.file.Path;
 import java.util.Date;
 
 public abstract class Entity {
 
     private final String id;
     private String name;
-    private String directory;
+    private Path directory;
     private long size;
     private Date dateCreated;
     private Date dateModified;
@@ -16,7 +17,7 @@ public abstract class Entity {
     private long mdFive;
     private CFolder parentFolder;
 
-    public Entity(String id, String name, String directory, long size, Date dateCreated, Date dateModified, String folderLocation, long mdFive, CFolder parentFolder) {
+    public Entity(String id, String name, Path directory, long size, Date dateCreated, Date dateModified, String folderLocation, long mdFive, CFolder parentFolder) {
         this.id = id;
         this.name = name;
         this.directory = directory;
@@ -40,11 +41,11 @@ public abstract class Entity {
         this.name = name;
     }
 
-    public String getDirectory() {
+    public Path getDirectory() {
         return directory;
     }
 
-    public void setDirectory(String directory) {
+    public void setDirectory(Path directory) {
         this.directory = directory;
     }
 
