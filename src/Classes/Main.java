@@ -1,5 +1,6 @@
 package Classes;
 
+import Model.MergeTask;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,6 +9,7 @@ import javafx.stage.Stage;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Main extends Application {
@@ -26,9 +28,10 @@ public class Main extends Application {
         Path path2 = Paths.get("C:\\HashiCorp\\Vagrant");
         Path path = Paths.get("C:\\fedora");
         MergeTask mergeTask;
-        mergeTask =new MergeTask(path,path2,null,"1","Merge_2",new Date("2017/10/10"),0,null );
-        System.out.println(        mergeTask.getMainDirectory());
-
+       /* mergeTask =new MergeTask(path,path2,null,"1","Merge_2",LocalDateTime.parse("2017-10-10)"),0,null );
+        mergeTask = new MergeTask(path,path2,null,);
+        System.out.println(        mergeTask.getMainDirectoryPath());
+*/
 
         launch(args);
     }

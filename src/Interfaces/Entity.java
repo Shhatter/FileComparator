@@ -1,35 +1,41 @@
 package Interfaces;
 
-import Classes.CFolder;
+import Model.CFolder;
 
+import java.io.File;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.UUID;
 
 public abstract class Entity {
 
-    private final String id;
+
+    private File file;
+    private final UUID id;
     private String name;
     private Path directory;
     private long size;
-    private Date dateCreated;
-    private Date dateModified;
+    private LocalDateTime dateCreated;
+    private LocalDateTime dateModified;
     private String folderLocation;
     private long mdFive;
     private CFolder parentFolder;
 
-    public Entity(String id, String name, Path directory, long size, Date dateCreated, Date dateModified, String folderLocation, long mdFive, CFolder parentFolder) {
-        this.id = id;
-        this.name = name;
-        this.directory = directory;
-        this.size = size;
-        this.dateCreated = dateCreated;
-        this.dateModified = dateModified;
-        this.folderLocation = folderLocation;
-        this.mdFive = mdFive;
-        this.parentFolder = parentFolder;
+
+    public Entity() {
+        this.id = UUID.randomUUID();
     }
 
-    public String getId() {
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
+    }
+
+    public UUID getId() {
         return id;
     }
 
@@ -57,19 +63,19 @@ public abstract class Entity {
         this.size = size;
     }
 
-    public Date getDateCreated() {
+    public LocalDateTime getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Date dateCreated) {
+    public void setDateCreated(LocalDateTime dateCreated) {
         this.dateCreated = dateCreated;
     }
 
-    public Date getDateModified() {
+    public LocalDateTime getDateModified() {
         return dateModified;
     }
 
-    public void setDateModified(Date dateModified) {
+    public void setDateModified(LocalDateTime dateModified) {
         this.dateModified = dateModified;
     }
 

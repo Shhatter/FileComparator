@@ -1,4 +1,4 @@
-package Classes;
+package Model;
 
 import Interfaces.Strategy;
 
