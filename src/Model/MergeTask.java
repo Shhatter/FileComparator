@@ -1,6 +1,7 @@
 package Model;
 
 import Interfaces.Entity;
+import Interfaces.Strategy;
 
 import java.nio.file.Path;
 import java.time.LocalDateTime;
@@ -10,41 +11,81 @@ import java.util.UUID;
 
 public class MergeTask {
 
+    private boolean firstCreation = true;
     private final UUID id;
     private Path mainDirectoryPath, comparedDirectoryPath, optionalDestDirectoryPath;
     private String mergeTaskID ;
     private String mergeTaskName;
     private LocalDateTime startDate;
-    private float progressBarPercent; // fancy, can be not implemented at all
+    //private float progressBarPercent; // fancy, can be not implemented at all
     private ArrayList<Conflict> conflictList;
-    private TreeReader mainDirectoryTree,comparedDirectoryTree,optionalDestDirectoryTree;
+    //private TreeReader mainDirectoryTree,comparedDirectoryTree,optionalDestDirectoryTree;
     private CFolder mainDirectoryFileSystem ;
+    private CFolder comparedDirectorySystem ;
+    private CFolder optionalDirectorySystem ;
+    private Strategy strategy;
+    private boolean isOptionalLocationSet;
 
 
-    public MergeTask(UUID id, Path mainDirectoryPath, Path comparedDirectoryPath, Path optionalDestDirectoryPath, String mergeTaskID, String mergeTaskName, LocalDateTime startDate, float progressBarPercent, ArrayList<Conflict> conflictList, TreeReader mainDirectoryTree, TreeReader comparedDirectoryTree, TreeReader optionalDestDirectoryTree, CFolder mainDirectoryFileSystem) {
+    public MergeTask( Path mainDirectoryPath, Path comparedDirectoryPath, Path optionalDestDirectoryPath, String mergeTaskID, String mergeTaskName) {
         this.id = UUID.randomUUID();
         this.mainDirectoryPath = mainDirectoryPath;
         this.comparedDirectoryPath = comparedDirectoryPath;
         this.optionalDestDirectoryPath = optionalDestDirectoryPath;
         this.mergeTaskID = mergeTaskID;
         this.mergeTaskName = mergeTaskName;
-        this.startDate = startDate;
-        this.progressBarPercent = progressBarPercent;
-        this.conflictList = conflictList;
-        this.mainDirectoryTree = mainDirectoryTree;
-        this.comparedDirectoryTree = comparedDirectoryTree;
-        this.optionalDestDirectoryTree = optionalDestDirectoryTree;
-        this.mainDirectoryFileSystem = mainDirectoryFileSystem;
-        createFileSystem();
+
+        if (firstCreation)
+        {
+            firstCreation = false ;
+            createFileSystem();
+        }
     }
-
-
 
     public void createFileSystem()
     {
-        mainDirectoryFileSystem = new CFolder(mainDirectoryPath,null);
-    }
 
+        mainDirectoryFileSystem.setParentFolder(null);
+        comparedDirectorySystem.setParentFolder(null);
+        mainDirectoryFileSystem.setDirectory(mainDirectoryPath);
+        comparedDirectorySystem.setDirectory(comparedDirectoryPath);
+
+        try
+        {
+            mainDirectoryFileSystem = new CFolder(mainDirectoryPath, null,0);
+        } catch (IllegalArgumentException e)
+        {
+            e.printStackTrace();
+        }
+
+
+        try
+        {
+            comparedDirectorySystem = new CFolder(comparedDirectoryPath, null,0);
+        } catch (IllegalArgumentException e)
+        {
+            e.printStackTrace();
+
+        }
+        if (optionalDestDirectoryPath != null)
+        {
+            optionalDirectorySystem.setParentFolder(null);
+            optionalDirectorySystem.setDirectory(optionalDestDirectoryPath);
+            isOptionalLocationSet = true;
+            try
+            {
+                optionalDirectorySystem = new CFolder(optionalDestDirectoryPath, null,0);
+            } catch (IllegalArgumentException e)
+            {
+                e.printStackTrace();
+            }
+
+        }
+        else
+        {
+            isOptionalLocationSet = false ;
+        }
+    }
 
     public Path getMainDirectoryPath() {
         return mainDirectoryPath;
@@ -94,13 +135,13 @@ public class MergeTask {
         this.startDate = startDate;
     }
 
-    public float getProgressBarPercent() {
-        return progressBarPercent;
-    }
-
-    public void setProgressBarPercent(float progressBarPercent) {
-        this.progressBarPercent = progressBarPercent;
-    }
+//    public float getProgressBarPercent() {
+//        return progressBarPercent;
+//    }
+//
+//    public void setProgressBarPercent(float progressBarPercent) {
+//        this.progressBarPercent = progressBarPercent;
+//    }
 
     public ArrayList<Conflict> getConflictList() {
         return conflictList;
@@ -110,28 +151,28 @@ public class MergeTask {
         this.conflictList = conflictList;
     }
 
-    public TreeReader getMainDirectoryTree() {
-        return mainDirectoryTree;
-    }
-
-    public void setMainDirectoryTree(TreeReader mainDirectoryTree) {
-        this.mainDirectoryTree = mainDirectoryTree;
-    }
-
-    public TreeReader getComparedDirectoryTree() {
-        return comparedDirectoryTree;
-    }
-
-    public void setComparedDirectoryTree(TreeReader comparedDirectoryTree) {
-        this.comparedDirectoryTree = comparedDirectoryTree;
-    }
-
-    public TreeReader getOptionalDestDirectoryTree() {
-        return optionalDestDirectoryTree;
-    }
-
-    public void setOptionalDestDirectoryTree(TreeReader optionalDestDirectoryTree) {
-        this.optionalDestDirectoryTree = optionalDestDirectoryTree;
-    } // setters & getters
+//    public TreeReader getMainDirectoryTree() {
+//        return mainDirectoryTree;
+//    }
+//
+//    public void setMainDirectoryTree(TreeReader mainDirectoryTree) {
+//        this.mainDirectoryTree = mainDirectoryTree;
+//    }
+//
+//    public TreeReader getComparedDirectoryTree() {
+//        return comparedDirectoryTree;
+//    }
+//
+//    public void setComparedDirectoryTree(TreeReader comparedDirectoryTree) {
+//        this.comparedDirectoryTree = comparedDirectoryTree;
+//    }
+//
+//    public TreeReader getOptionalDestDirectoryTree() {
+//        return optionalDestDirectoryTree;
+//    }
+//
+//    public void setOptionalDestDirectoryTree(TreeReader optionalDestDirectoryTree) {
+//        this.optionalDestDirectoryTree = optionalDestDirectoryTree;
+//    } // setters & getters
 
 }

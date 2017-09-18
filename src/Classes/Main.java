@@ -25,14 +25,13 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-        Path path2 = Paths.get("C:\\HashiCorp\\Vagrant");
-        Path path = Paths.get("C:\\fedora");
-        MergeTask mergeTask;
+        launch(args);
+
        /* mergeTask =new MergeTask(path,path2,null,"1","Merge_2",LocalDateTime.parse("2017-10-10)"),0,null );
         mergeTask = new MergeTask(path,path2,null,);
         System.out.println(        mergeTask.getMainDirectoryPath());
 */
 
-        launch(args);
+
     }
 }

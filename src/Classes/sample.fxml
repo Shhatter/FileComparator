@@ -9,13 +9,12 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-
-<TilePane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<TilePane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Classes.Controller">
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: YELLOW;" />
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0" style="-fx-background-color: CYAN;">
          <children>
-            <Button contentDisplay="CENTER" mnemonicParsing="false" text="Button">
+            <Button fx:id="confirmMergeButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#confirmMerge" text="Confirm Merge">
                <opaqueInsets>
                   <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                </opaqueInsets>

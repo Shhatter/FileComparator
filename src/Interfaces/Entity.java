@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public abstract class Entity {
 
-
+    private int treeDeph ;
     private File file;
     private final UUID id;
     private String name;
@@ -22,6 +22,15 @@ public abstract class Entity {
     private long mdFive;
     private CFolder parentFolder;
 
+    public int getTreeDeph()
+    {
+        return treeDeph;
+    }
+
+    public void setTreeDeph(int treeDeph)
+    {
+        this.treeDeph = treeDeph;
+    }
 
     public Entity() {
         this.id = UUID.randomUUID();
